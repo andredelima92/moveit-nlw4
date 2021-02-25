@@ -1,21 +1,27 @@
+import { useContext } from "react";
+import { ChallangesContext } from "../contexts/ChallangesContext";
 import styles from "../styles/components/ChallangeBox.module.css";
 
 const ChallangeBox: React.FC = () => {
-  const hasActiveChallange = true;
+  const { activeChallange, resetChallange } = useContext(ChallangesContext);
 
   return (
     <div className={styles.challangeBoxContainer}>
-      {hasActiveChallange ? (
+      {activeChallange ? (
         <div className={styles.challangeActive}>
-          <header>Ganhe 400xp</header>
+          <header>Ganhe {activeChallange.amount} xp</header>
           <main>
-            <img src="icons/body.svg" alt="" />
+            <img src={`icons/${activeChallange.type}.svg`} alt="" />
             <strong>Novo desafio</strong>
-            <p>Levante e faça uma caminhada de 3 minutos</p>
+            <p>{activeChallange.description}</p>
           </main>
 
           <footer>
-            <button type="button" className={styles.challangeFailedButton}>
+            <button
+              type="button"
+              className={styles.challangeFailedButton}
+              onClick={resetChallange}
+            >
               Falhei
             </button>
             <button type="button" className={styles.challangeSucceededButton}>
