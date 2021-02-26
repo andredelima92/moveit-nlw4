@@ -9,6 +9,7 @@ import styles from "../styles/pages/Home.module.css";
 import React from "react";
 import ChallangeBox from "../components/ChallangeBox";
 import ExperienceBar from "../components/ExperienceBar";
+import { CountdownProvider } from "../contexts/CountdownContext";
 
 export default function Home() {
   return (
@@ -18,16 +19,18 @@ export default function Home() {
       </Head>
       <ExperienceBar />
 
-      <section>
-        <div>
-          <Profile />
-          <CompletedChallanges />
-          <Countdown />
-        </div>
-        <div>
-          <ChallangeBox />
-        </div>
-      </section>
+      <CountdownProvider>
+        <section>
+          <div>
+            <Profile />
+            <CompletedChallanges />
+            <Countdown />
+          </div>
+          <div>
+            <ChallangeBox />
+          </div>
+        </section>
+      </CountdownProvider>
     </div>
   );
 }
